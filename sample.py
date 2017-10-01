@@ -11,6 +11,7 @@ def sample():
     """適当に学習させる
     create_dataset_pklを使って訓練データとテストデータを作ってそれぞれ
     train.pklとtest.pklにリネームすれば画像認識の学習を行う
+    SimpleConvNetのパラメータoutput_sizeは分類の数を設定する必要がある
     """
 
     x_train, t_train = restore_dataset("./train.pkl")
@@ -21,7 +22,7 @@ def sample():
     network = SimpleConvNet(
         input_dim=(1, 100, 100),
         conv_param={'filter_num': 30, 'filter_size': 15, 'pad': 0, 'stride': 1},
-        hidden_size=300, output_size=29, weight_init_std=0.01)
+        hidden_size=300, output_size=15, weight_init_std=0.01)
 
     trainer = Trainer(network, x_train, t_train, x_test, t_test,
                       epochs=max_epochs, mini_batch_size=100,
